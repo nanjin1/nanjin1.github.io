@@ -1,0 +1,754 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yuehui Li - Guangdong University of Technology</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Lato:wght@300;400;700;900&family=Roboto+Slab:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --primary: #1a1a2e;
+            --accent: #2563eb;
+            --accent-hover: #1d4ed8;
+            --text: #333;
+            --text-light: #666;
+            --text-muted: #999;
+            --bg: #ffffff;
+            --bg-gray: #f8f9fa;
+            --border: #e5e7eb;
+            --shadow: 0 1px 3px rgba(0,0,0,0.08);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Lato', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: var(--text);
+            line-height: 1.8;
+            background: var(--bg);
+            -webkit-font-smoothing: antialiased;
+        }
+
+        a { color: var(--accent); text-decoration: none; }
+        a:hover { color: var(--accent-hover); text-decoration: underline; }
+
+        .wrapper {
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* ===== PROFILE SECTION ===== */
+        .profile-section {
+            display: flex;
+            gap: 40px;
+            padding: 50px 0 40px;
+            border-bottom: 1px solid var(--border);
+            align-items: flex-start;
+        }
+
+        .profile-left {
+            flex-shrink: 0;
+            width: 200px;
+            text-align: center;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-start;
+        }
+
+        .profile-photo {
+            width: 180px;
+            height: 240px;
+            border-radius: 8px;
+            object-fit: cover;
+            object-position: center 20%;
+            border: 1px solid var(--border);
+        }
+
+        .profile-name-zh {
+            font-size: 1.05rem;
+            color: var(--text-light);
+            margin-top: 12px;
+        }
+
+        .profile-links {
+            display: flex;
+            justify-content: center;
+            gap: 14px;
+            margin-top: auto;
+            flex-wrap: wrap;
+        }
+
+        .profile-links a {
+            color: var(--text-light);
+            font-size: 0.85rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: color 0.2s;
+        }
+
+        .profile-links a:hover { color: var(--accent); text-decoration: none; }
+        .profile-links a i { font-size: 1rem; }
+
+        .profile-right {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .profile-right h1 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 6px;
+        }
+
+        .profile-right .subtitle {
+            font-size: 1rem;
+            color: var(--text-light);
+            margin-bottom: 16px;
+        }
+
+        .profile-right .bio {
+            font-size: 0.95rem;
+            color: var(--text);
+            line-height: 1.85;
+        }
+
+        .profile-right .bio p { margin-bottom: 10px; }
+
+        .highlight {
+            background: #fef3c7;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 700;
+        }
+
+        /* ===== SECTION COMMON ===== */
+        section {
+            padding: 36px 0;
+            border-bottom: 1px solid var(--border);
+        }
+
+        section:last-of-type { border-bottom: none; }
+
+        section h2 {
+            font-family: 'Roboto Slab', serif;
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 20px;
+            padding-bottom: 8px;
+            border-bottom: 2px solid var(--accent);
+            display: inline-block;
+        }
+
+        /* ===== NEWS ===== */
+        .news-list {
+            list-style: none;
+            max-height: 200px;
+            overflow-y: auto;
+            padding-right: 8px;
+        }
+
+        .news-list li {
+            padding: 6px 0;
+            font-size: 0.92rem;
+            display: flex;
+            gap: 12px;
+            border-bottom: 1px dashed #eee;
+        }
+
+        .news-list li:last-child { border-bottom: none; }
+
+        .news-date {
+            color: var(--text-muted);
+            font-weight: 700;
+            flex-shrink: 0;
+            min-width: 90px;
+            font-size: 0.85rem;
+        }
+
+        /* ===== PUBLICATIONS ===== */
+        .pub-item {
+            margin-bottom: 20px;
+            padding: 16px 20px;
+            background: var(--bg-gray);
+            border-radius: 6px;
+            border-left: 3px solid var(--accent);
+        }
+
+        .pub-item .pub-title {
+            font-weight: 700;
+            font-size: 0.95rem;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .pub-item .pub-authors {
+            font-size: 0.88rem;
+            color: var(--text-light);
+            margin-bottom: 4px;
+        }
+
+        .pub-item .pub-authors .me {
+            font-weight: 700;
+            color: var(--text);
+            text-decoration: underline;
+        }
+
+        .pub-item .pub-venue {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-style: italic;
+            margin-bottom: 6px;
+        }
+
+        .pub-links a {
+            display: inline-block;
+            font-size: 0.78rem;
+            padding: 2px 10px;
+            border: 1px solid var(--accent);
+            border-radius: 3px;
+            margin-right: 6px;
+            color: var(--accent);
+            font-weight: 700;
+            transition: all 0.2s;
+        }
+
+        .pub-links a:hover {
+            background: var(--accent);
+            color: #fff;
+            text-decoration: none;
+        }
+
+        /* ===== EXPERIENCE ===== */
+        .exp-item {
+            display: flex;
+            gap: 20px;
+            margin-bottom: 22px;
+            align-items: flex-start;
+        }
+
+        .exp-logo {
+            width: 52px;
+            height: 52px;
+            border-radius: 8px;
+            background: var(--bg-gray);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.3rem;
+        }
+
+        .exp-content { flex: 1; }
+
+        .exp-content h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+
+        .exp-content .exp-role {
+            font-size: 0.88rem;
+            color: var(--text-light);
+        }
+
+        .exp-content .exp-desc {
+            font-size: 0.85rem;
+            color: var(--text-light);
+            margin-top: 4px;
+            line-height: 1.7;
+        }
+
+        .exp-date {
+            font-size: 0.82rem;
+            color: var(--text-muted);
+            flex-shrink: 0;
+            text-align: right;
+            min-width: 80px;
+        }
+
+        /* ===== AWARDS ===== */
+        .awards-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+        }
+
+        .awards-table td {
+            padding: 8px 10px;
+            border-bottom: 1px solid #f0f0f0;
+            vertical-align: top;
+        }
+
+        .awards-table tr:last-child td { border-bottom: none; }
+
+        .awards-table .award-name { font-weight: 600; color: var(--primary); }
+        .awards-table .award-level { color: var(--text-light); }
+        .awards-table .award-year {
+            color: var(--text-muted);
+            text-align: right;
+            white-space: nowrap;
+            font-size: 0.85rem;
+        }
+
+        .award-badge {
+            display: inline-block;
+            font-size: 0.72rem;
+            padding: 1px 7px;
+            border-radius: 3px;
+            font-weight: 700;
+            margin-left: 6px;
+        }
+
+        .badge-national { background: #fef3c7; color: #92400e; }
+        .badge-provincial { background: #e0f2fe; color: #0369a1; }
+
+        /* ===== EDUCATION ===== */
+        .edu-item {
+            display: flex;
+            gap: 20px;
+            align-items: flex-start;
+            margin-bottom: 16px;
+        }
+
+        .edu-icon {
+            width: 48px;
+            height: 48px;
+            border-radius: 8px;
+            background: var(--bg-gray);
+            border: 1px solid var(--border);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1.2rem;
+        }
+
+        .edu-content { flex: 1; }
+        .edu-content h4 { font-size: 0.95rem; font-weight: 700; color: var(--primary); }
+        .edu-content p { font-size: 0.88rem; color: var(--text-light); }
+        .edu-date { font-size: 0.82rem; color: var(--text-muted); flex-shrink: 0; }
+
+        /* ===== PROJECTS ===== */
+        .projects-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .project-card {
+            display: block;
+            padding: 16px;
+            background: var(--bg-gray);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            transition: box-shadow 0.2s, transform 0.15s;
+            color: inherit;
+        }
+
+        .project-card:hover {
+            box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+            transform: translateY(-2px);
+            text-decoration: none;
+        }
+
+        .project-card h4 {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: var(--primary);
+            margin-bottom: 4px;
+        }
+
+        .project-card p {
+            font-size: 0.82rem;
+            color: var(--text-light);
+            line-height: 1.6;
+            margin-bottom: 8px;
+        }
+
+        .project-card .proj-meta {
+            font-size: 0.78rem;
+            color: var(--text-muted);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .lang-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            display: inline-block;
+            margin-right: 3px;
+        }
+
+        .lang-py { background: #3572A5; }
+        .lang-c { background: #555; }
+
+        /* ===== SKILLS ===== */
+        .skills-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+
+        .skill-block h4 {
+            font-size: 0.82rem;
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            color: var(--text-muted);
+            margin-bottom: 8px;
+            font-weight: 700;
+        }
+
+        .skill-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 6px;
+        }
+
+        .skill-tag {
+            font-size: 0.8rem;
+            padding: 3px 10px;
+            background: var(--bg-gray);
+            border: 1px solid var(--border);
+            border-radius: 4px;
+            color: var(--text);
+        }
+
+        /* ===== PATENTS ===== */
+        .patent-item {
+            font-size: 0.9rem;
+            margin-bottom: 10px;
+            padding-left: 16px;
+            border-left: 2px solid var(--border);
+            color: var(--text-light);
+        }
+
+        .patent-item strong { color: var(--text); }
+
+        /* ===== FOOTER ===== */
+        footer {
+            padding: 30px 0;
+            text-align: center;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            border-top: 1px solid var(--border);
+        }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 700px) {
+            .profile-section { flex-direction: column; align-items: center; text-align: center; }
+            .profile-left { width: 160px; }
+            .profile-photo { width: 150px; height: 150px; }
+            .projects-grid { grid-template-columns: 1fr; }
+            .skills-grid { grid-template-columns: 1fr 1fr; }
+            .exp-item { flex-direction: column; gap: 6px; }
+            .exp-date { text-align: left; }
+            .awards-table { font-size: 0.82rem; }
+        }
+
+        /* scrollbar */
+        .news-list::-webkit-scrollbar { width: 4px; }
+        .news-list::-webkit-scrollbar-thumb { background: #ddd; border-radius: 4px; }
+    </style>
+</head>
+<body>
+
+<div class="wrapper">
+
+    <!-- ===== PROFILE ===== -->
+    <div class="profile-section">
+        <div class="profile-left">
+            <img class="profile-photo" src="photo.jpg" alt="Yuehui Li">
+            <div class="profile-name-zh">李悦晖</div>
+            <div class="profile-links">
+                <a href="mailto:18054277716@163.com"><i class="fas fa-envelope"></i> Email</a>
+                <a href="https://github.com/nanjin1" target="_blank"><i class="fab fa-github"></i> GitHub</a>
+                <!-- <a href="#"><i class="fas fa-graduation-cap"></i> Scholar</a> -->
+            </div>
+        </div>
+
+        <div class="profile-right">
+            <h1>Yuehui Li</h1>
+            <p class="subtitle">Senior Undergraduate (22 Fall), Guangdong University of Technology (GDUT)</p>
+            <div class="bio">
+                <p>
+                    I am a senior undergraduate student majoring in <strong>Communication Engineering</strong> at the School of Information Engineering, <a href="https://www.gdut.edu.cn/" target="_blank">Guangdong University of Technology</a>.
+                    My GPA is 3.97/5.00 (top 8.5%), with an overall score of 87.68 (top 1%).
+                    I was awarded the <strong>National Scholarship (2024-2025)</strong> and have received the First-class Outstanding Student Scholarship for three consecutive years.
+                </p>
+                <p>
+                    My research interests focus on <strong>Infrared Small Target Detection</strong>, <strong>Computer Vision</strong>, and <strong>Embedded Robotics Systems</strong>.
+                    I have published papers in <strong>IEEE TGRS</strong> as first and co-author, and have extensive experience in national-level robotics competitions.
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== NEWS ===== -->
+    <section>
+        <h2>News</h2>
+        <ul class="news-list">
+            <li><span class="news-date">Oct. 2025</span><span>First-author paper <strong>Ivan-ISTD</strong> released on <a href="https://arxiv.org/abs/2510.12241" target="_blank">arXiv</a>.</span></li>
+            <li><span class="news-date">Apr. 2025</span><span>Co-authored paper on Cross-view Representation Learning accepted by <strong>IEEE TGRS</strong>.</span></li>
+            <li><span class="news-date">Sep. 2024</span><span>Won <strong>2nd Prize (National)</strong> at RoboCup China, Automatic Sorting Track.</span></li>
+            <li><span class="news-date">Sep. 2024</span><span>Awarded the <strong>National Scholarship (2024-2025)</strong>.</span></li>
+        </ul>
+    </section>
+
+    <!-- ===== RESEARCH INTERESTS ===== -->
+    <section>
+        <h2>Research Interests</h2>
+        <div class="bio">
+            <ul style="padding-left: 20px; font-size: 0.93rem; line-height: 2;">
+                <li><strong>Infrared Small Target Detection:</strong> Cross-domain shift, heteroscedastic noise perturbation, real-scene benchmarks</li>
+                <li><strong>Computer Vision:</strong> Cross-view representation learning, remote sensing change detection, vision super-alignment</li>
+                <li><strong>Embedded Robotics:</strong> STM32 MCU development, FreeRTOS, motion control, path planning, visual recognition</li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ===== PUBLICATIONS ===== -->
+    <section>
+        <h2>Publications</h2>
+
+        <div class="pub-item">
+            <div class="pub-title">Rethinking Generalizable Infrared Small Target Detection: A Real-scene Benchmark and Cross-view Representation Learning</div>
+            <div class="pub-authors">Y. Lu, <span class="me">Y. Li</span>, X. Guo, S. Yuan, Y. Shi, &amp; L. Lin</div>
+            <div class="pub-venue">IEEE Transactions on Geoscience and Remote Sensing (TGRS), 2025</div>
+            <div class="pub-links">
+                <a href="https://arxiv.org/abs/2504.16487" target="_blank">arXiv</a>
+                <a href="https://doi.org/10.1109/TGRS.2025.3588885" target="_blank">DOI</a>
+                <a href="https://github.com/nanjin1/Ivan-ISTD" target="_blank">Code</a>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Ivan-ISTD: Rethinking Cross-domain Heteroscedastic Noise Perturbations in Infrared Small Target Detection</div>
+            <div class="pub-authors"><span class="me">Y. Li</span>, Y. Lu, H. Wu, S. Zhang, L. Lin, Y. Shi</div>
+            <div class="pub-venue">arXiv preprint, 2025 &nbsp;|&nbsp; First Author</div>
+            <div class="pub-links">
+                <a href="https://arxiv.org/abs/2510.12241" target="_blank">arXiv</a>
+                <a href="https://github.com/nanjin1/Ivan-ISTD" target="_blank">Code</a>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Robotic Arm Control Using Visual Neural Networks and Hierarchical Reinforcement Learning</div>
+            <div class="pub-authors">J. Guo, T. Xue, <span class="me">Y. Li</span>, D. Liu, K. Xie, &amp; B. Wang</div>
+            <div class="pub-venue">6th International Conference on Robotics and Computer Vision (ICRCV), 2024</div>
+            <div class="pub-links">
+                <a href="https://doi.org/10.1109/ICRCV62709.2024.10758557" target="_blank">DOI</a>
+            </div>
+        </div>
+
+        <div class="pub-item">
+            <div class="pub-title">Exploring Extensive Representation Learning in Remote Sensing Change Detection by Vision Super-alignment and Beyond</div>
+            <div class="pub-authors">Y. Lin, Z. Weng, <span class="me">Y. Li</span>, X. Guo, Y. Shi, &amp; L. Lin</div>
+            <div class="pub-venue">IEEE Sensors Journal, 2025 &nbsp;|&nbsp; Submitted</div>
+            <div class="pub-links">
+                <a style="border-color: #ccc; color: #999; cursor: default;">Under Review</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== EDUCATION ===== -->
+    <section>
+        <h2>Education</h2>
+        <div class="edu-item">
+            <div class="edu-icon"><i class="fas fa-university"></i></div>
+            <div class="edu-content">
+                <h4>Guangdong University of Technology (GDUT)</h4>
+                <p>B.Eng. in Communication Engineering, School of Information Engineering</p>
+                <p>GPA: 3.97/5.00 (Top 8.5%) &nbsp;|&nbsp; Overall: 87.68 (Top 1%)</p>
+            </div>
+            <div class="edu-date">Sep. 2022 &ndash; Jun. 2026</div>
+        </div>
+    </section>
+
+    <!-- ===== AWARDS ===== -->
+    <section>
+        <h2>Selected Awards</h2>
+        <table class="awards-table">
+            <tr>
+                <td class="award-name">National Scholarship<span class="award-badge badge-national">National</span></td>
+                <td class="award-level">Top honor for undergraduate students</td>
+                <td class="award-year">2024-2025</td>
+            </tr>
+            <tr>
+                <td class="award-name">RoboCup China &mdash; Exploration &amp; Treasure Hunting<span class="award-badge badge-national">National</span></td>
+                <td class="award-level">Regional 1st Prize (Champion) &amp; National 3rd Prize</td>
+                <td class="award-year">2023</td>
+            </tr>
+            <tr>
+                <td class="award-name">RoboCup China &mdash; Automatic Sorting<span class="award-badge badge-national">National</span></td>
+                <td class="award-level">National 2nd Prize</td>
+                <td class="award-year">2024</td>
+            </tr>
+            <tr>
+                <td class="award-name">RoboCup China &mdash; AI+ Innovation<span class="award-badge badge-national">National</span></td>
+                <td class="award-level">National 3rd Prize</td>
+                <td class="award-year">2025</td>
+            </tr>
+            <tr>
+                <td class="award-name">Guangdong Engineering Comprehensive Skills Competition<span class="award-badge badge-provincial">Provincial</span></td>
+                <td class="award-level">Provincial 1st Prize &mdash; Intelligent Delivery</td>
+                <td class="award-year">2023</td>
+            </tr>
+            <tr>
+                <td class="award-name">National Mathematical Modeling Competition<span class="award-badge badge-provincial">Provincial</span></td>
+                <td class="award-level">Provincial 2nd Prize (Category C)</td>
+                <td class="award-year">2024</td>
+            </tr>
+            <tr>
+                <td class="award-name">National Optoelectronic Design Competition (11th)</td>
+                <td class="award-level">Southeast Regional 3rd Prize &mdash; Maze Robot</td>
+                <td class="award-year">2023</td>
+            </tr>
+            <tr>
+                <td class="award-name">&ldquo;Hetai Cup&rdquo; MCU Application Design Competition<span class="award-badge badge-provincial">Provincial</span></td>
+                <td class="award-level">Provincial 2nd Prize &mdash; Agricultural Robot</td>
+                <td class="award-year">2023</td>
+            </tr>
+            <tr>
+                <td class="award-name">iCAN Innovation &amp; Entrepreneurship Competition<span class="award-badge badge-provincial">Provincial</span></td>
+                <td class="award-level">Provincial 2nd Prize &mdash; Innovation Track</td>
+                <td class="award-year">2023</td>
+            </tr>
+            <tr>
+                <td class="award-name">Rongkang Developer Competition (Guangdong)<span class="award-badge badge-provincial">Provincial</span></td>
+                <td class="award-level">Provincial 3rd Prize &mdash; Programming Track</td>
+                <td class="award-year">2025</td>
+            </tr>
+            <tr>
+                <td class="award-name">Outstanding Student First-class Scholarship</td>
+                <td class="award-level">3 consecutive years</td>
+                <td class="award-year">2022-2025</td>
+            </tr>
+        </table>
+    </section>
+
+    <!-- ===== PROJECTS ===== -->
+    <section>
+        <h2>Selected Projects</h2>
+        <div class="projects-grid">
+            <a class="project-card" href="https://github.com/nanjin1/Ivan-ISTD" target="_blank">
+                <h4>Ivan-ISTD</h4>
+                <p>Cross-domain heteroscedastic noise perturbation framework for infrared small target detection. Published in IEEE TGRS.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-py"></span>Python</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 7</span>
+                </div>
+            </a>
+            <a class="project-card" href="https://github.com/nanjin1/Robot-for-harvesting-tomatoes" target="_blank">
+                <h4>Tomato Harvesting Robot</h4>
+                <p>Award-winning agricultural robot with visual recognition and mechanical arm control. iCAN &amp; MCU Design Competition.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-c"></span>C</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 5</span>
+                </div>
+            </a>
+            <a class="project-card" href="https://github.com/nanjin1/Exploration-and-treasure-hunting-robot" target="_blank">
+                <h4>Exploration &amp; Treasure Hunting Robot</h4>
+                <p>Autonomous robot navigating obstacles and locating treasures. Regional Champion &amp; National 3rd Prize at RoboCup.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-c"></span>C</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 4</span>
+                </div>
+            </a>
+            <a class="project-card" href="https://github.com/nanjin1/Automatic-sorting-robot" target="_blank">
+                <h4>Automatic Sorting Robot</h4>
+                <p>Mecanum-wheel robot with FreeRTOS, multi-servo arm, and color recognition. National 2nd Prize at RoboCup.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-c"></span>C</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 3</span>
+                </div>
+            </a>
+            <a class="project-card" href="https://github.com/nanjin1/Intelligent-Delivery-Cart" target="_blank">
+                <h4>Intelligent Delivery Cart</h4>
+                <p>Smart delivery system with path planning and autonomous navigation. Provincial 1st Prize.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-c"></span>C</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 1</span>
+                </div>
+            </a>
+            <a class="project-card" href="https://github.com/nanjin1/Maze-adversarial-robot" target="_blank">
+                <h4>Maze Adversarial Robot</h4>
+                <p>Autonomous maze-solving robot using Canny edge detection and real-time path optimization.</p>
+                <div class="proj-meta">
+                    <span><span class="lang-dot lang-c"></span>C</span>
+                    <span><i class="fas fa-star" style="font-size:0.7rem"></i> 3</span>
+                </div>
+            </a>
+        </div>
+    </section>
+
+    <!-- ===== PATENTS ===== -->
+    <section>
+        <h2>Patents</h2>
+        <div class="patent-item">
+            <strong>[1]</strong> X. Zibao, L. Jianqun, <strong>Y. Li</strong>, et al. &ldquo;A Cooperative Small-scale Comprehensive Agricultural Robot with Primary and Secondary Vehicles.&rdquo; Chinese Utility Model Patent, CN222193173U. <em>Granted.</em>
+        </div>
+        <div class="patent-item">
+            <strong>[2]</strong> X. Zibao, L. Jianqun, <strong>Y. Li</strong>, et al. &ldquo;An Automatic Sorting Intelligent Robot.&rdquo; Chinese Utility Model Patent, CN222179706U. <em>Granted.</em>
+        </div>
+    </section>
+
+    <!-- ===== SKILLS ===== -->
+    <section>
+        <h2>Skills</h2>
+        <div class="skills-grid">
+            <div class="skill-block">
+                <h4>Programming</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">Python</span>
+                    <span class="skill-tag">C</span>
+                    <span class="skill-tag">MATLAB</span>
+                    <span class="skill-tag">Shell</span>
+                    <span class="skill-tag">LaTeX</span>
+                </div>
+            </div>
+            <div class="skill-block">
+                <h4>Frameworks &amp; Tools</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">PyTorch</span>
+                    <span class="skill-tag">FreeRTOS</span>
+                    <span class="skill-tag">OpenMV</span>
+                    <span class="skill-tag">Git</span>
+                    <span class="skill-tag">Linux</span>
+                    <span class="skill-tag">Keil</span>
+                </div>
+            </div>
+            <div class="skill-block">
+                <h4>Hardware</h4>
+                <div class="skill-tags">
+                    <span class="skill-tag">STM32</span>
+                    <span class="skill-tag">UART/SPI/I2C</span>
+                    <span class="skill-tag">DMA</span>
+                    <span class="skill-tag">CAN Bus</span>
+                    <span class="skill-tag">PCB Design</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+<footer>
+    <div class="wrapper">
+        &copy; 2025 Yuehui Li. Last updated: Mar. 2025.
+    </div>
+</footer>
+
+</body>
+</html>
